@@ -1,12 +1,16 @@
 package be.viveselic.colorpickerapplication
 
 import android.os.Bundle
+import android.widget.LinearLayout
 import android.widget.SeekBar
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.skydoves.colorpickerview.ColorEnvelope
+import com.skydoves.colorpickerview.ColorPickerView
+import com.skydoves.colorpickerview.listeners.ColorEnvelopeListener
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,6 +34,14 @@ class MainActivity : AppCompatActivity() {
             }
             override fun onStopTrackingTouch(seekBar: SeekBar?) {
                 // Do something when the user stops dragging the seek bar
+            }
+        })
+
+        val colorPickerView = findViewById<ColorPickerView>(R.id.colorPickerView)
+        colorPickerView.setColorListener(object : ColorEnvelopeListener {
+            override fun onColorSelected(envelope: ColorEnvelope, fromUser: Boolean) {
+                val linearLayout = findViewById<LinearLayout>(R.id.main)
+                linearLayout.setBackgroundColor(envelope.color)
             }
         })
 
