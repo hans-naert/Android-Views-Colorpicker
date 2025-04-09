@@ -1,6 +1,8 @@
 package be.viveselic.colorpickerapplication
 
 import android.os.Bundle
+import android.widget.SeekBar
+import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -16,5 +18,20 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+        val textView = findViewById<TextView>(R.id.textView)
+        val seekBar = findViewById<SeekBar>(R.id.seekBar)
+        seekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+                textView.text = "Progress: $progress"
+            }
+            override fun onStartTrackingTouch(seekBar: SeekBar?) {
+                // Do something when the user starts dragging the seek bar
+            }
+            override fun onStopTrackingTouch(seekBar: SeekBar?) {
+                // Do something when the user stops dragging the seek bar
+            }
+        })
+
     }
 }
